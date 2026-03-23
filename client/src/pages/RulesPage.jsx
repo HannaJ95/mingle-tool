@@ -1,27 +1,37 @@
-import PageLayout from '../components/layout/PageLayout'
+import PageLayout from '../components/layout/PageLayout.jsx'
+import Text from "../components/Text.jsx";
+import RulesSection from "../components/RulesSection.jsx";
 
 function RulesPage() {
-  return(
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-6">
-      <h1 className="text-3xl font-bold mb-4">
-         Mingle-Tool</h1>
-      <p className="text-gray-600 mb-6 text-center">
-        Welcome! Here’s how it works:
-        </p>   
+  return (
+    <PageLayout >
+      <div className="space-y-6 text-center max-w-xl mx-auto">
 
-        <div className="bg-white p-6 rounded-2xl shadow-md w-full max-w-md">
-          <ul className="space-y-3 text-gray-700">
-            <li>Enter your name</li>
-            <li>Get placed in a group</li>
-            <li>Talk to your group</li>
-            <li>Have fun!</li>
-          </ul>
-          </div>
-          <button className="mt-6 bg-blue-500 text-white px-6 py-3 rounded-xl hover:bg-blue-600 transition">
-            Start
-          </button>
-    </div>
-  )
+        <Text as="h1">Game Rules</Text>
+
+        <RulesSection
+          title="Get Your Card"
+          description="Start the game and get your mystery animal card"
+        />
+
+        <RulesSection
+          title="Find your group"
+          description="Mingle, ask around and track down others with the same animal."
+        />
+
+        <RulesSection
+          title="Unlock the fun"
+          description="Found your group? Boom – conversation topics unlocked."
+        />
+
+        <RulesSection
+          title="Stay connected"
+          description="Game ends, but the connections don't."
+        />
+
+      </div>
+    </PageLayout>
+  );
 }
 
 export default RulesPage;
