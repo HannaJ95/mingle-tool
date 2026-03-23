@@ -1,14 +1,17 @@
 import PageLayout from '../components/layout/PageLayout.jsx'
 import Text from "../components/Text.jsx";
 import RulesSection from "../components/RulesSection.jsx";
+import Button from "../components/ui/Button";
+
 
 function RulesPage() {
   return (
     <PageLayout >
-      <div className="space-y-6 text-center max-w-xl mx-auto">
+      <div className="max-w-xl mx-auto px-6 pt-14 pb-14 flex flex-col">
 
-        <Text as="h1">Game Rules</Text>
+        <Text as="h1" className="text-center mb-12">Game Rules</Text>
 
+        <div className="flex flex-col gap-9">
         <RulesSection
           title="Get Your Card"
           description="Start the game and get your mystery animal card"
@@ -28,10 +31,16 @@ function RulesPage() {
           title="Stay connected"
           description="Game ends, but the connections don't."
         />
-
+        </div>
+      <div className="mt-14 -mx-6">
+    <Button variant="primary" arrow className="w-full">
+      START
+    </Button>
       </div>
+    </div>
     </PageLayout>
   );
 }
+
 
 export default RulesPage;
