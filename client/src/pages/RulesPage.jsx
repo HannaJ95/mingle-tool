@@ -7,9 +7,11 @@ import Button from "../components/ui/Button";
 function RulesPage() {
   return (
     <PageLayout >
-      <div className="max-w-xl mx-auto flex flex-col">
+      <div className="max-w-xl mx-auto flex flex-col px-6 pt-14 pb-14 gap-14">
 
-        <Text as="h1" className="text-center mb-12">Game Rules</Text>
+        <Text as="h1" className="text-center ">
+          Game Rules
+        </Text>
 
         <div className="flex flex-col gap-9">
         <RulesSection
