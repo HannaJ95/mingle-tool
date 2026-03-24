@@ -7,7 +7,7 @@ import Button from "../components/ui/Button";
 function RulesPage() {
   return (
     <PageLayout >
-      <div className="max-w-xl mx-auto px-6 pt-14 pb-14 flex flex-col">
+      <div className="max-w-xl mx-auto flex flex-col">
 
         <Text as="h1" className="text-center mb-12">Game Rules</Text>
 
@@ -32,12 +32,12 @@ function RulesPage() {
           description="Game ends, but the connections don't."
         />
         </div>
-      <div className="mt-14 -mx-6">
-    <Button variant="primary" arrow className="w-full">
+      
+    <Button variant="primary" arrow>
       START
     </Button>
       </div>
-    </div>
+    
     </PageLayout>
   );
 }
