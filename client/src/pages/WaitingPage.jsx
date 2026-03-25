@@ -5,7 +5,7 @@ import PageLayout from "../components/layout/PageLayout";
 export default function WaitingPage(){
     return(
         <PageLayout>
-            <div className="max-w-sm w-full mx-auto min-h-screen flex flex-col items-center text-center py-24 gap-14">
+            <div className="max-w-sm w-full mx-auto min-h-screen flex flex-col items-center justify-center text-center py-24 gap-14">
         
                 <Text as="h1">
                     We are finding your Group!
