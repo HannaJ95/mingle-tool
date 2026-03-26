@@ -3,7 +3,7 @@ import Text from "../components/Text";
 import Button from "../components/ui/Button";
 
 export default function ContactsPage() {
-  // tillfällig data (sen från backend)
+  // tempory data (later from backend)
   const users = [
     { id: 1, name: "Jan Jansson", email: "janansson@gmail.com" },
     { id: 2, name: "Jan Jansson", email: "janansson@gmail.com" },
@@ -16,17 +16,17 @@ export default function ContactsPage() {
     <PageLayout>
       <div className="max-w-xl mx-auto px-6 py-14 flex flex-col gap-14">
 
-        {/* Titel */}
+        
         <Text as="h1">
           CONNECT
         </Text>
 
-        {/* Lista */}
+        {/* List */}
         <div className="flex flex-col gap-10">
           {users.map((user) => (
             <div key={user.id} className="flex items-center justify-between">
 
-              {/* Vänster sida */}
+              
               <div className="flex items-center gap-3">
                 <span className="text-2xl">⭐</span>
 
@@ -36,15 +36,15 @@ export default function ContactsPage() {
                 </div>
               </div>
 
-              {/* Knapp */}
-              <Button variant="secondary">
+              
+              <Button variant="secondary mx-4 my-4">
                 CONNECT
               </Button>
             </div>
           ))}
         </div>
 
-        {/* Bottom knapp */}
+        
         <Button>
           START NEW GAME
         </Button>
