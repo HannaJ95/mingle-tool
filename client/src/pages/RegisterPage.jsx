@@ -5,7 +5,7 @@ export default function RegisterPage() {
   return (
     <PageLayout>
       <header className="pb-12">
-        <h1 className="text-4xl font-medium leading-[35px]">Sign Up</h1>
+        <h1 className="text-4xl font-bold leading-[35px]">Sign Up</h1>
       </header>
 
       <main>
