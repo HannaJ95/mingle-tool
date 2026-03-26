@@ -94,7 +94,7 @@ export default function RegisterForm() {
       {/* OPTIONAL SOCIAL FIELDS */}
       <SocialLinks formData={formData} onChange={handleChange} />
 
-      <Button arrow>Ready</Button>
+      <Button type="submit" arrow>Ready</Button>
     </form>
   );
 }
