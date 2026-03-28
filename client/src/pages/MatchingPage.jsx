@@ -13,7 +13,7 @@ export default function MatchingPage() {
         </h1>
       </header>
 
-      <main className="flex flex-1 flex-col justify-between items-center text-center">
+      <main className="flex flex-1 flex-col justify-between items-center text-center gap-10">
         
         <div className="flex flex-col items-center gap-4.5">
 
