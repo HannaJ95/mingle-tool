@@ -46,7 +46,7 @@ export default function RegisterForm() {
     e.preventDefault();
     if (!validate()) return;
     console.log("submit", formData);
-    navigate("/rules");
+    // navigate("/rules");
   };
 
   return (
