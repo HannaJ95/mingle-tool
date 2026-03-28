@@ -23,7 +23,7 @@ export default function QuestionsPage() {
 
   return (
     <PageLayout justify="between">
-      <header className="pb-12 text-center">
+      <header className="flex-1 pb-12 text-center">
         <h1 className="text-4xl font-bold leading-8.75">Let´s Talk!</h1>
       </header>
 
