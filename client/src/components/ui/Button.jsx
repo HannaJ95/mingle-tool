@@ -4,6 +4,7 @@ export default function Button({ children, onClick, arrow = false, variant = 'pr
   const variants = {
     primary: 'font-bold',
     secondary: 'font-medium',
+    connect: 'w-auto px-3 py-1 text-xs bg-gray-300 text-black rounded-none border border-black'
   }
 
   return (
