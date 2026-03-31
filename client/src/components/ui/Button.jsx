@@ -2,7 +2,7 @@
 export default function Button({ children, onClick, arrow = false, variant = 'primary', as: Tag = 'button', type = 'button', ...props }) {
 
 
-  const base = 'w-full flex items-center justify-center p-8 rounded-lg text-2xl uppercase cursor-pointer gap-2 bg-black text-white'
+  const base = 'w-full flex items-center justify-center p-8 rounded-lg text-2xl uppercase cursor-pointer gap-2 bg-[#E51536] text-white'
 
   const variants = {
     primary: 'font-bold',

@@ -11,10 +11,10 @@ export default function RegisterForm() {
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    instagram: "",
-    linkedin: "",
+    Name: "",
+    Roll: "",
+    Mail: "",
+    Contact: "(optional)",
     portfolio: "",
   });
 
@@ -56,19 +56,19 @@ export default function RegisterForm() {
       noValidate
       className="flex flex-col gap-14"
     >
-      {/* EVENT-INFO */}
-      <div className="flex justify-between border-b-1 items-center">
-        <h2 className="text-2xl font-medium">Event:</h2>
-        <p className="text-right font-bold text-base">
-          Information om eventet. Välkommen
-        </p>
-      </div>
+       {/* EVENT-INFO
+       <div className="flex justify-between border-b pb-2 items-center">
+         <h2 className="text-2xl font-medium">Event:</h2>
+         <p className="text-right font-bold text-base">
+           Information om eventet. Välkommen
+         </p>
+       </div> */}
 
       {/* REQUIRED NAME FIELD */}
-      <div className="flex flex-col gap-14">
+      <div className="flex flex-col gap-12">
         <Field
           id="name"
-          label="Name"
+          label="Name:"
           placeholder="First name _ Last name"
           value={formData.name}
           onChange={handleChange("name")}
@@ -79,9 +79,20 @@ export default function RegisterForm() {
 
         {/* REQUIRED EMAIL FIELD */}
         <Field
+          id="role"
+          label="Role:"
+          placeholder="e.g. UX Designer, Frontend dev"
+          value={formData.role}
+          onChange={handleChange("email")}
+          error={errors.email}
+          maxLength={254}
+          required
+        />
+      </div>
+        <Field
           id="email"
-          label="Mail"
-          placeholder="mail@example.com"
+          label="Mail:"
+          placeholder="example@gmail.com"
           type="email"
           value={formData.email}
           onChange={handleChange("email")}
@@ -89,7 +100,15 @@ export default function RegisterForm() {
           maxLength={254}
           required
         />
-      </div>
+        <Field
+          id="contact"
+          label="Contact: (optional)"
+          placeholder=""
+          value={formData.contact}
+          onChange={handleChange("contact")}
+          error={errors.contact}
+          maxLength={50}
+        />
 
       {/* OPTIONAL SOCIAL FIELDS */}
       <SocialLinks formData={formData} onChange={handleChange} />
@@ -111,7 +130,7 @@ function Field({
   maxLength,
 }) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2">
       <label htmlFor={id} className="text-2xl font-medium uppercase">
         {label}
       </label>
@@ -177,7 +196,7 @@ function SocialLinks({ formData, onChange }) {
       <legend className="sr-only">Social media links</legend>
 
       {/* SHOW CLICKABLE ICON-BUTTONS */}
-      <div className="flex justify-between items-center" role="group">
+      <div className="flex justify-between items-center mt-4" role="group">
         {links.map(({ key, label, icon }) => {
           const isActive = open === key || !!formData[key];
           return (
