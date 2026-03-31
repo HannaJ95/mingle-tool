@@ -1,10 +1,10 @@
 export default function Text({ as: Tag = "p", children, className = "" }) {
-  const baseStyles = "text-gray-800";
+  const baseStyles = "";
 
   const variants = {
-    h1: "text-3xl font-bold",
-    h2: "text-2xl font-semibold",
-    p: "text-base"
+    h1: "text-3xl font-bold text-gray-800",
+    h2: "text-2xl font-semibold text-gray-800",
+    p: "text-base text-gray-800"
   };
 
   return (

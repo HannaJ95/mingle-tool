@@ -6,32 +6,37 @@ import Button from "../components/ui/Button";
 
 function RulesPage() {
   return (
+  <div className="min-h-screen bg-[#001A52]">  
     <PageLayout >
-      <div className="max-w-xl mx-auto flex flex-col px-6 pt-14">
+      <div className="max-w-xl mx-auto flex flex-col px-6 pt-14 ">
 
-        <Text as="h1" className="text-center mb-12">
-          Game Rules
+        <Text as="h1" className="text-center mb-12 text-white">
+          How it works
         </Text>
 
-        <div className="flex flex-col gap-9">
+        <div className="flex flex-col gap-9 ">
         <RulesSection
-          title="Get Your Card"
-          description="Start the game and get your mystery animal card"
+          index="1"
+          title="Get you an animal card"
+          description="You get a unique animal card. Everyone in your grouphas the same animal"
         />
 
         <RulesSection
-          title="Find your group"
-          description="Mingle, ask around and track down others with the same animal."
+          index="2"
+          title="Find your pack"
+          description="Walk around the room and ask: 'What animal do you have?' Find all 3 in your group."
         />
 
         <RulesSection
-          title="Unlock the fun"
-          description="Found your group? Boom – conversation topics unlocked."
+          index="3"
+          title="Answer questions together"
+          description="When the group is gathered, you'll get 3 questions to discuss. No right or wrong answers."
         />
 
         <RulesSection
-          title="Stay connected"
-          description="Game ends, but the connections don't."
+          index="4"
+          title="Collect contacts"
+          description="Finally, you see each others contact information. Save them and play a new round!"
         />
         </div>
       <div className="mt-12 mb-12">
@@ -44,6 +49,7 @@ function RulesPage() {
 
       </div>
     </PageLayout>
+    </div>
   );
 }
 
