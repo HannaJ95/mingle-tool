@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 const PORT = 3000;
 
-const CLIENT_URL = "http://localhost:5173"
+const CLIENT_URL = "http://localhost:5174"
 
 //  Middleware
 app.use(cors({
