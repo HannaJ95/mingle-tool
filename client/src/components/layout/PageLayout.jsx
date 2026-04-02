@@ -11,7 +11,7 @@ export default function PageLayout({
 
   return (
     <div
-      className={`min-h-screen max-w-sm mx-auto px-6 flex flex-col ${py} ${justifyClass[justify]}`}
+      className={`min-h-screen max-w-md mx-auto px-6 flex flex-col ${py} ${justifyClass[justify]}`}
     >
       {children}
     </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../ui/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router";
 
 import InstagramIcon from "../../assets/instagram.svg";
 import LinkedinIcon from "../../assets/linkedin.svg";
@@ -8,13 +8,17 @@ import LinkIcon from "../../assets/link.svg";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+  const role = searchParams.get("role");
+
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
-    Name: "",
-    Roll: "",
-    Mail: "",
-    Contact: "(optional)",
+    name: "",
+    email: "",
+    instagram: "",
+    linkedin: "",
     portfolio: "",
   });
 
@@ -45,7 +49,7 @@ export default function RegisterForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    console.log("submit", formData);
+    console.log("submit", { ...formData, role });
     // navigate("/rules");
   };
 
@@ -56,19 +60,19 @@ export default function RegisterForm() {
       noValidate
       className="flex flex-col gap-14"
     >
-       {/* EVENT-INFO
-       <div className="flex justify-between border-b pb-2 items-center">
-         <h2 className="text-2xl font-medium">Event:</h2>
-         <p className="text-right font-bold text-base">
-           Information om eventet. Välkommen
-         </p>
-       </div> */}
+      {/* EVENT-INFO */}
+      <div className="flex justify-between border-b items-center">
+        <h2 className="text-2xl font-medium">Event:</h2>
+        <p className="text-right font-bold text-base">
+          Information om eventet. Välkommen
+        </p>
+      </div>
 
       {/* REQUIRED NAME FIELD */}
-      <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-14">
         <Field
           id="name"
-          label="Name:"
+          label="Name"
           placeholder="First name _ Last name"
           value={formData.name}
           onChange={handleChange("name")}
@@ -79,20 +83,9 @@ export default function RegisterForm() {
 
         {/* REQUIRED EMAIL FIELD */}
         <Field
-          id="role"
-          label="Role"
-          placeholder="e.g. UX Designer, Frontrnd dev"
-          value={formData.role}
-          onChange={handleChange("email")}
-          error={errors.email}
-          maxLength={254}
-          required
-        />
-      </div>
-        <Field
           id="email"
           label="Mail"
-          placeholder="example@gmail.com"
+          placeholder="mail@example.com"
           type="email"
           value={formData.email}
           onChange={handleChange("email")}
@@ -100,15 +93,7 @@ export default function RegisterForm() {
           maxLength={254}
           required
         />
-        <Field
-          id="contact"
-          label="Contact"
-          placeholder="(optional)"
-          value={formData.contact}
-          onChange={handleChange("contact")}
-          error={errors.contact}
-          maxLength={50}
-        />
+      </div>
 
       {/* OPTIONAL SOCIAL FIELDS */}
       <SocialLinks formData={formData} onChange={handleChange} />
@@ -130,7 +115,7 @@ function Field({
   maxLength,
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col">
       <label htmlFor={id} className="text-2xl font-medium uppercase">
         {label}
       </label>
@@ -147,7 +132,7 @@ function Field({
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
         className={`border-b font-normal outline-none 
-                    placeholder:text-muted placeholder:text-xs min-h-[44px] 
+                    placeholder:text-muted placeholder:text-xs min-h-11
                     ${error ? "border-red-600" : "border-black focus:border-black"}
                 `}
       />
@@ -196,7 +181,7 @@ function SocialLinks({ formData, onChange }) {
       <legend className="sr-only">Social media links</legend>
 
       {/* SHOW CLICKABLE ICON-BUTTONS */}
-      <div className="flex justify-between items-center mt-4" role="group">
+      <div className="flex justify-between items-center" role="group">
         {links.map(({ key, label, icon }) => {
           const isActive = open === key || !!formData[key];
           return (
