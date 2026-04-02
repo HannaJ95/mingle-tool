@@ -88,6 +88,7 @@ export default function RegisterForm() {
           maxLength={254}
           required
         />
+
       </div>
         <Field
           id="email"
@@ -100,6 +101,7 @@ export default function RegisterForm() {
           maxLength={254}
           required
         />
+        
         <Field
           id="contact"
           label="Contact: (optional)"

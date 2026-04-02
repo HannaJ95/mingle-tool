@@ -16,7 +16,7 @@ export default function ContactsPage() {
     <PageLayout>
       <div className="max-w-xl mx-auto py-14 flex flex-col gap-14">
 
-      <div className="px-6">  
+      <div className="px-6 background-[001A52]">  
         <Text as="h1">
           CONNECT
         </Text>
