@@ -80,19 +80,18 @@ export default function RegisterForm() {
         {/* REQUIRED EMAIL FIELD */}
         <Field
           id="role"
-          label="Role:"
-          placeholder="e.g. UX Designer, Frontend dev"
+          label="Role"
+          placeholder="e.g. UX Designer, Frontrnd dev"
           value={formData.role}
           onChange={handleChange("email")}
           error={errors.email}
           maxLength={254}
           required
         />
-
       </div>
         <Field
           id="email"
-          label="Mail:"
+          label="Mail"
           placeholder="example@gmail.com"
           type="email"
           value={formData.email}
@@ -101,11 +100,10 @@ export default function RegisterForm() {
           maxLength={254}
           required
         />
-        
         <Field
           id="contact"
-          label="Contact: (optional)"
-          placeholder=""
+          label="Contact"
+          placeholder="(optional)"
           value={formData.contact}
           onChange={handleChange("contact")}
           error={errors.contact}
