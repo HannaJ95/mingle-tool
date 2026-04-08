@@ -2,9 +2,15 @@ import PageLayout from '../components/layout/PageLayout.jsx'
 import Text from "../components/Text.jsx";
 import RulesSection from "../components/RulesSection.jsx";
 import Button from "../components/ui/Button";
-
+import { socket } from "../socket";
 
 function RulesPage() {
+
+    const handleStart = () => {
+    console.log("START CLICKED");
+    socket.emit("joinQueue");
+  };
+
   return (
   <div className="min-h-screen bg-[#001A52]">  
     <PageLayout >
@@ -40,7 +46,7 @@ function RulesPage() {
         />
         </div>
       <div className="mt-12 mb-12">
-        <Button variant="primary" arrow>
+        <Button onClick={handleStart} variant="primary" arrow>
           START
         </Button>
       </div>
