@@ -19,7 +19,7 @@ export default function RegisterForm() {
     email: "",
     instagram: "",
     linkedin: "",
-    portfolio: "",
+    website: "",
   });
 
   const handleChange = (field) => (e) => {
@@ -46,11 +46,25 @@ export default function RegisterForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-    console.log("submit", { ...formData, role });
-    // navigate("/rules");
+
+    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, role }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setErrors((prev) => ({ ...prev, server: data.error }));
+      return;
+    }
+
+    sessionStorage.setItem("userId", data.user.id);
+    navigate("/rules");
   };
 
   return (
@@ -98,7 +112,9 @@ export default function RegisterForm() {
       {/* OPTIONAL SOCIAL FIELDS */}
       <SocialLinks formData={formData} onChange={handleChange} />
 
-      <Button type="submit" arrow>Ready</Button>
+      <Button type="submit" arrow>
+        Ready
+      </Button>
     </form>
   );
 }
@@ -170,7 +186,7 @@ function SocialLinks({ formData, onChange }) {
     },
     {
       key: "portfolio",
-      label: "Portfolio or webbsite",
+      label: "Portfolio or website",
       icon: <img src={LinkIcon} alt="" aria-hidden="true" />,
       placeholder: "yoursite.com",
     },

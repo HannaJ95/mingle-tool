@@ -1,11 +1,11 @@
-import { createUser, getUserById, getUserByEmail, getUsersByRole } from '../src/db/models/user.js';
+import { upsertUser, getUserById, getUserByEmail, getUsersByRole } from '../src/db/models/user.js';
 
-// const { data, error } = await createUser({
-//   name: 'Anna Svensson',
-//   email: 'johanna2@test.com',
+// const { data, error } = await upsertUser({
+//   name: 'Lina Svensson',
+//   email: 'LinaS@test.com',
 //   role: 'student',
 //   instagram: '',
-//   linkedin: '',
+//   linkedin: 'linaLinkedin',
 //   website: '',
 // });
 
@@ -13,8 +13,8 @@ import { createUser, getUserById, getUserByEmail, getUsersByRole } from '../src/
 // const { data, error } = await getUserById(75);
 
 
-// const { data, error } = await getUserByEmail("lina@test.com");
-const { data, error } = await getUsersByRole("company");
+const { data, error } = await getUserByEmail("LinaS@test.com");
+// const { data, error } = await getUsersByRole("company");
 
 
 
