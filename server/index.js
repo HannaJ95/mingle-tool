@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 const PORT = 3000;
 
-const CLIENT_URL = "http://localhost:5174"
+const CLIENT_URL = "http://localhost:5173"
 
 //  Middleware
 app.use(cors({
@@ -30,35 +30,54 @@ app.get("/", (req, res) => {
   res.send("Server is running ");
 });
 
-//  Matchmaking state
-let waitingPlayer = null;
+//matchmaking state
+let queue = [];
+const MIN_PLAYERS = 4;
+const MAX_PLAYERS = 5;
 
-// socket logic
+//socket logic
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
-  // matchmaking
-  if (waitingPlayer) {
-    console.log("Match found!");
+  socket.on("joinQueue", () => {
+    console.log("Join queue:", socket.id);
 
-    socket.emit("match", { opponent: waitingPlayer.id });
-    waitingPlayer.emit("match", { opponent: socket.id });
+    // Avoid duplicates in queue
+    const alreadyInQueue = queue.find(s => s.id === socket.id);
+    if (alreadyInQueue) return;
 
-    waitingPlayer = null;
-  } else {
-    console.log("Waiting for another player...");
-    waitingPlayer = socket;
-  }
+    queue.push(socket);
 
-   // disconnect
+    console.log("Queue:", queue.map(s => s.id));
+
+    tryCreateGroup();
+  });
+
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
 
-    if (waitingPlayer === socket) {
-      waitingPlayer = null;
-    }
+    queue = queue.filter(s => s.id !== socket.id);
   });
 });
+  
+  function tryCreateGroup() {
+  if (queue.length < MIN_PLAYERS) return;
+
+  const group = queue.splice(0, MAX_PLAYERS);
+
+  const roomId = `room-${Date.now()}`;
+
+  console.log("Creating room:", roomId);
+
+  group.forEach((player) => {
+    player.join(roomId);
+  });
+
+  io.to(roomId).emit("groupReady", {
+    roomId,
+    players: group.map(p => p.id),
+  });
+}
 
 //  Start server
 server.listen(PORT, () => {
