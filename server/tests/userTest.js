@@ -1,6 +1,4 @@
-import { createUser } from '../server/src/db/models/user.js';
-import { getUserById } from '../server/src/db/models/user.js';
-import { getUserByEmail } from '../server/src/db/models/user.js';
+import { createUser, getUserById, getUserByEmail, getUsersByRole } from '../src/db/models/user.js';
 
 // const { data, error } = await createUser({
 //   name: 'Anna Svensson',
@@ -15,7 +13,8 @@ import { getUserByEmail } from '../server/src/db/models/user.js';
 // const { data, error } = await getUserById(75);
 
 
-const { data, error } = await getUserByEmail("lina@test.com");
+// const { data, error } = await getUserByEmail("lina@test.com");
+const { data, error } = await getUsersByRole("company");
 
 
 

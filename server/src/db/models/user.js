@@ -29,3 +29,11 @@ export async function getUserByEmail(email) {
     .single();
   return { data, error };
 }
+
+export async function getUsersByRole(role) {
+    const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('role', role)
+    return { data, error };
+}
