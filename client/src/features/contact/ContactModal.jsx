@@ -47,7 +47,7 @@ export default function ContactModal({ user, onClose }) {
         {fields.map(({ label, value }) => (
           <div
             key={label}
-            className="flex flex-col gap-2 border-b-2 border-white"
+            className="flex flex-col gap-2 border-b border-white"
           >
             <Text as="dt" variant="bodyBold" className="uppercase">
               {label}:

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Text from "../../components/ui/Text.jsx";
 import Button from "../../components/ui/Button";
-import ContactModal from "./contactModal.jsx";
+import ContactModal from "./ContactModal.jsx";
 
 import CheersIcon from "../../assets/icons/cheers.svg?react";
 import FigureIcon from "../../assets/icons/figure.svg?react";
