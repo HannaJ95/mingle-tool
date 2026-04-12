@@ -1,1 +1,15 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@theme {
+  --color-primary: #001a52;
+  --color-secondary: #e51536;
+
+  --color-dark: #121212;
+  --color-light: #ffffff;
+  --color-placeholder: #474747;
+
+  --font-sans: "Inter", sans-serif;
+
+  --breakpoint-xs: 24rem;
+}
