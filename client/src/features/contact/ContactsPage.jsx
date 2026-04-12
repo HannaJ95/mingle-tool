@@ -1,18 +1,26 @@
+import { useState } from "react";
 import Text from "../../components/ui/Text.jsx";
 import Button from "../../components/ui/Button";
+import ContactModal from "./contactModal.jsx";
 
 import CheersIcon from "../../assets/icons/cheers.svg?react";
 import FigureIcon from "../../assets/icons/figure.svg?react";
 
 export default function ContactsPage() {
+  const [selectedUser, setSelectedUser] = useState(null);
+
   const users = [
-    { id: 1, name: "Jan Jansson", email: "janansson@gmail.com" },
-    { id: 2, name: "Jan Jansson", email: "janansson@gmail.com" },
-    { id: 3, name: "Jan Jansson", email: "janansson@gmail.com" },
-    { id: 4, name: "Jan Jansson", email: "janansson@gmail.com" },
+    { id: 1, name: "Jan Jansson", email: "jan_jansson@gmail.com" },
+    { id: 2, name: "Lina linsson", email: "lina_linsson@gmail.com" },
+    { id: 3, name: "Nils Nilsson", email: "nils_nilsson@gmail.com" },
+    { id: 4, name: "Johan Johansson", email: "johan_johansson@gmail.com" },
   ];
 
   return (
+    <>
+      {selectedUser && (
+        <ContactModal user={selectedUser} onClose={() => setSelectedUser(null)} />
+      )}
       <main className="min-w-80 p-6 max-w-md w-screen min-h-screen flex flex-col justify-end gap-14 text-primary mx-auto">
         <div className="flex items-end justify-between">
           <Text as="h1" variant="heading">
@@ -40,12 +48,13 @@ export default function ContactsPage() {
               </div>
 
               {/* CONNECT BUTTON FOR CONTACT INFO */}
-              <Button variant="connect">CONNECT</Button>
+              <Button variant="connect" onClick={() => setSelectedUser(user)}>CONNECT</Button>
             </li>
           ))}
         </ul>
 
         <Button>START NEW GAME</Button>
       </main>
+    </>
   );
 }
