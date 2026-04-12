@@ -11,8 +11,10 @@ export default function RegisterPage() {
 
   if (!VALID_ROLES.includes(role)) {
     return (
-        <main>
-          <p>Invalid registration link. Please scan the QR code again.</p>
+        <main className="min-w-screen min-h-screen p-6 flex items-center">
+          <Text as="h1" variant="heading" className="text-center text-primary">
+              Invalid registration link. Please scan the QR code again.
+          </Text>
         </main>
     );
   }
