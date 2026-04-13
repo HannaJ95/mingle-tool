@@ -46,6 +46,16 @@ const MAX_PLAYERS = 5;
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
+  socket.on("ready", () => {
+  console.log("READY clicked by:", socket.id);
+
+  const roomId = [...socket.rooms][1]; 
+
+  console.log("Room:", roomId);
+
+  io.to(roomId).emit("startQuestions");
+});
+
   socket.on("joinQueue", () => {
     console.log("Join queue:", socket.id);
 

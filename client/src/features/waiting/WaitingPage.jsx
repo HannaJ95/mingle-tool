@@ -6,19 +6,24 @@ import { useNavigate } from "react-router";
 export default function WaitingPage() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    socket.on("groupReady", (data) => {
-      console.log("Matched!", data);
-      navigate("/matching");
-    });
+useEffect(() => {
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
-    socket.on("groupReady", handleGroupReady);
+  console.log("Joining queue as:", user);
 
-    return () => {
-      socket.off("groupReady", handleGroupReady);
-    };
-  }, []);
+  socket.emit("joinQueue", user);
 
+  const handleGroupReady = (data) => {
+    console.log("Matched!", data);
+    navigate("/matching", { state: data });
+  };
+
+  socket.on("groupReady", handleGroupReady);
+
+  return () => {
+    socket.off("groupReady", handleGroupReady);
+  };
+}, []);
 //   return <div>Waiting for players...</div>;
 // }
   return (
