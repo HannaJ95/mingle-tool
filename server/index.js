@@ -1,11 +1,10 @@
-import express from "express";
-import http from "http";
-import { Server } from "socket.io";
-import cors from "cors";
+import express from 'express';
 
 // make an express app
 const app = express();
-const PORT = 3000;
+
+const PORT = process.env.PORT || 3000;
+// const PORT = 3000;
 
 const CLIENT_URL = "http://localhost:5173"
 
@@ -83,3 +82,13 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
+// app.use(cors());
+// app.use(express.json());
+app.use(userRoutes);
+
+// app.listen(PORT, () => {
+//   console.log(`Example app listening on port ${PORT}`);
+// });
+
