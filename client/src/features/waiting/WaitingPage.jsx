@@ -8,7 +8,7 @@ export default function WaitingPage() {
 
 useEffect(() => {
   // const user = { name: "Allan" };
-  JSON.parse(sessionStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
   console.log("Joining queue as:", user);
 
