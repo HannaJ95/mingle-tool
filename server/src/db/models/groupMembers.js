@@ -1,6 +1,6 @@
 import supabase from '../../../supabase.js';
 
-export async function addGroupMember(groupId, userId) {
+export async function insertGroupMember(groupId, userId) {
   const { data, error } = await supabase
     .from('group_members')
     .insert({ group_id: groupId, user_id: userId })

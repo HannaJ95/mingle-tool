@@ -1,4 +1,5 @@
-import { getAvailableCards, getRandomAvailableCard, markCardUnavailable, markCardAvailable } from '../src/db/models/card.js';
+// import { getAvailableCards, markCardUnavailable, markCardAvailable } from '../src/db/models/card.js';
+import { getRandomAvailableCard } from '../src/controllers/cardController.js';
 
 // const { data, error } = await getAvailableCards();
 const { data, error } = await getRandomAvailableCard();

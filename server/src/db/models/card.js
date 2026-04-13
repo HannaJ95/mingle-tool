@@ -9,12 +9,6 @@ export async function getAvailableCards() {
   return { data, error: null };
 }
 
-export async function getRandomAvailableCard() {
-  const { data, error } = await getAvailableCards();
-  const random = data[Math.floor(Math.random() * data.length)];
-  return { data: random, error: null };
-}
-
 export async function markCardUnavailable(cardId) {
   const { data, error } = await supabase
     .from("cards")
