@@ -3,6 +3,7 @@ import Button from "../../components/ui/Button";
 import { useNavigate, useSearchParams } from "react-router";
 import Field from "./Field";
 import SocialLinks from "./SocialLinks";
+import socket from "../../socket";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -58,6 +59,9 @@ export default function RegisterForm() {
     );
 
     const data = await response.json();
+
+    console.log("USER FROM DB:", data);
+    socket.emit("joinQueue", data.user);
 
     if (!response.ok) {
       setErrors((prev) => ({ ...prev, server: data.error }));

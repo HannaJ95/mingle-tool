@@ -51,7 +51,6 @@ export default function MatchingPage() {
             )}
           </div>
           <Text as="p" variant="subheading" className="text-dark">
-            Total: {players?.length || 0} members
             Total: {group?.members?.length ?? 0} members
           </Text>
 
