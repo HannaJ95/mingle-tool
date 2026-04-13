@@ -8,12 +8,9 @@ export async function getQuestionsByTopicId(topicId) {
   return { data, error };
 }
 
-export async function getRandomQuestionByTopicId(topicId) {
+export async function getQuestions() {
   const { data, error } = await supabase
     .from('questions')
-    .select('*, topics(name)')
-    .eq('topic_id', topicId);
-  if (error || !data || data.length === 0) return { data: null, error };
-  const random = data[Math.floor(Math.random() * data.length)];
-  return { data: random, error: null };
+    .select('*, topics(name)');
+  return { data, error };
 }
