@@ -8,6 +8,7 @@ function RulesPage() {
 const navigate = useNavigate();
 
 const handleContinue = () => {
+  console.log("CLICKED");
   socket.emit("joinQueue");
   navigate("/waiting");
 };

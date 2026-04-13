@@ -1,6 +1,26 @@
 import Text from "../../components/ui/Text.jsx";
+import { useEffect } from "react";
+import socket from "../../socket";
+import { useNavigate } from "react-router";
 
 export default function WaitingPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    socket.on("groupReady", (data) => {
+      console.log("Matched!", data);
+      navigate("/matching");
+    });
+
+    socket.on("groupReady", handleGroupReady);
+
+    return () => {
+      socket.off("groupReady", handleGroupReady);
+    };
+  }, []);
+
+//   return <div>Waiting for players...</div>;
+// }
   return (
       <div className="min-w-80 max-w-screen flex flex-col items-center">
       <main className="min-h-screen w-full max-w-md flex flex-col justify-center gap-10 xs:gap-14">

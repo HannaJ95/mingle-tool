@@ -1,4 +1,8 @@
 import express from 'express';
+import cors from "cors";
+import http from "http";
+import { Server } from "socket.io";
+// import userRoutes from "./routes/userRoutes.js";
 
 // make an express app
 const app = express();
@@ -6,11 +10,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 // const PORT = 3000;
 
-const CLIENT_URL = "http://localhost:5173"
+const CLIENT_URL = ["http://localhost:5173", "http://localhost:5174"];
 
 //  Middleware
 app.use(cors({
-  origin: CLIENT_URL
+  origin: CLIENT_URL,
+  credentials: true
 }));
 
 app.use(express.json());
@@ -21,8 +26,11 @@ const server = http.createServer(app);
 // Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: CLIENT_URL
+    origin: CLIENT_URL,
+    methods: ["GET", "POST"],
+    credentials: true
   }
+
 });
 
 app.get("/", (req, res) => {
@@ -52,8 +60,8 @@ io.on("connection", (socket) => {
     tryCreateGroup();
   });
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+  socket.on("disconnect", (reason) => {
+    console.log("User disconnected:", socket.id, "| Reason:", reason);
 
     queue = queue.filter(s => s.id !== socket.id);
   });
@@ -86,7 +94,7 @@ server.listen(PORT, () => {
 
 // app.use(cors());
 // app.use(express.json());
-app.use(userRoutes);
+// app.use(userRoutes);
 
 // app.listen(PORT, () => {
 //   console.log(`Example app listening on port ${PORT}`);
