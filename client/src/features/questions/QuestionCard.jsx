@@ -1,6 +1,6 @@
 import Text from "../../components/ui/Text";
 
-export default function QuestionCard({ mainQuestion, extraQuestion }) {
+export default function QuestionCard({ question }) {
   return (
     <article
       tabIndex={0}
@@ -27,7 +27,7 @@ export default function QuestionCard({ mainQuestion, extraQuestion }) {
       >
 
         <Text as="p" variant="subheading" className="text-light px-15">
-          {mainQuestion}
+          {question}
         </Text>
 
       </div>

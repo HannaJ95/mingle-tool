@@ -24,9 +24,14 @@ export async function registerUser(req, res) {
       });
   }
 
+  // SPLIT NAME INTO FIRSTNAME AND LASTNAME
+  const [firstname, ...rest] = name.trim().split(" ");
+  const lastname = rest.join(" ") || null;
+
   // SAVE USER
   const { data: user, error } = await upsertUser({
-    name,
+    firstname,
+    lastname,
     email,
     role,
     instagram: instagram || null,

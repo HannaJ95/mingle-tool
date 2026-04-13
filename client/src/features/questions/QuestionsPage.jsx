@@ -2,25 +2,13 @@ import { useState } from "react";
 import Button from "../../components/ui/Button.jsx";
 import Text from "../../components/ui/Text.jsx";
 import QuestionCard from "./QuestionCard";
+import useAppStore from "../../store/useAppStore";
 
 import ArrowLeftIcon from "../../assets/icons/arrowLeft.svg?react";
 import ArrowRightIcon from "../../assets/icons/arrowRight.svg?react";
 
 export default function QuestionsPage() {
-  const questions = [
-    {
-      mainQuestion: "1. How do you feel about AI?",
-      extraQuestion: "1. How do you work with AI?",
-    },
-    {
-      mainQuestion: "2. How do you feel about AI?",
-      extraQuestion: "2. How do you work with AI?",
-    },
-    {
-      mainQuestion: "3. How do you feel about AI?",
-      extraQuestion: "3. How do you work with AI?",
-    },
-  ];
+  const { questions } = useAppStore();
 
   const [current, setCurrent] = useState(0);
 
@@ -36,7 +24,7 @@ export default function QuestionsPage() {
 
           {/* CARD */}
           <div aria-live="polite" aria-atomic="true">
-            <QuestionCard {...questions[current]} />
+            <QuestionCard question={questions[current].question} />
           </div>
 
           {/* NAV BUTTONS */}
