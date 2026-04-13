@@ -1,8 +1,17 @@
 import Text from "../../components/ui/Text.jsx";
 import RulesSection from "./RulesSection.jsx";
 import Button from "../../components/ui/Button.jsx";
+import socket from "../../socket";
+import { useNavigate } from "react-router";
 
 function RulesPage() {
+const navigate = useNavigate();
+
+const handleContinue = () => {
+  socket.emit("joinQueue");
+  navigate("/waiting");
+};
+
   return (
     <div className="min-w-80 max-w-screen flex flex-col items-center bg-primary">
       <div className="min-h-screen w-full max-w-md flex flex-col justify-end p-6">
@@ -43,7 +52,7 @@ function RulesPage() {
             />
           </div>
 
-          <Button arrow>START</Button>
+          <Button arrow onClick={handleContinue}>START</Button>
         </main>
       </div>
     </div>

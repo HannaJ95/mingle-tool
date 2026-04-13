@@ -18,10 +18,15 @@ function App() {
       console.log("Connected:", socket.id);
     });
 
-    socket.on("match", (data) => {
-      console.log("Matched with:", data.opponent);
-    });
-  }, []);
+  socket.on("groupReady", (data) => {
+    console.log("GROUP READY:", data);
+  });
+
+  return () => {
+    socket.off("connect");
+    socket.off("groupReady");
+  };
+}, []);
 
   return (
     <BrowserRouter>
