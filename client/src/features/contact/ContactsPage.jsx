@@ -3,6 +3,7 @@ import Text from "../../components/ui/Text.jsx";
 import Button from "../../components/ui/Button";
 import useAppStore from "../../store/useAppStore";
 import ModalContact from "./ModalContact.jsx"
+import { useNavigate } from "react-router";
 
 import CheersIcon from "../../assets/icons/cheers.svg?react";
 import contactIcons from "../../assets/icons/contact/contactIcons.js";
@@ -10,6 +11,7 @@ import contactIcons from "../../assets/icons/contact/contactIcons.js";
 export default function ContactsPage() {
   const [selectedUser, setSelectedUser] = useState(null);
   const { user, group } = useAppStore();
+  const navigate = useNavigate();
 
   const users = [...(group?.members ?? [])].sort((a, b) => {
     if (a.id === user?.id) return -1;
@@ -54,7 +56,7 @@ export default function ContactsPage() {
           ))}
         </ul>
 
-        <Button>START NEW GAME</Button>
+        <Button onClick={() => navigate("/")}>START NEW GAME</Button>
       </main>
     </>
   );

@@ -60,7 +60,7 @@ export default function RegisterForm() {
 
     const data = await response.json();
 
-    console.log("USER FROM DB:", data);
+    console.log("USER FROM DB:", data.user);
     socket.emit("joinQueue", data.user);
 
     if (!response.ok) {

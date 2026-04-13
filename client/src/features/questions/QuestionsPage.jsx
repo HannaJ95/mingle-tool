@@ -3,11 +3,14 @@ import Button from "../../components/ui/Button.jsx";
 import Text from "../../components/ui/Text.jsx";
 import QuestionCard from "./QuestionCard";
 import useAppStore from "../../store/useAppStore";
+import { useNavigate } from "react-router";
 
 import ArrowLeftIcon from "../../assets/icons/arrowLeft.svg?react";
 import ArrowRightIcon from "../../assets/icons/arrowRight.svg?react";
 
 export default function QuestionsPage() {
+
+  const navigate = useNavigate();
   const { questions } = useAppStore();
 
   const [current, setCurrent] = useState(0);
@@ -44,7 +47,9 @@ export default function QuestionsPage() {
           </div>
         </div>
 
-        <Button className={current === questions.length - 1 ? "" : "invisible pointer-events-none"}>
+        <Button 
+        onClick={() => navigate("/contact")}
+        className={current === questions.length - 1 ? "" : "invisible pointer-events-none"}>
           We are finished
         </Button>
 

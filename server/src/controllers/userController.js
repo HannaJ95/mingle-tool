@@ -1,4 +1,5 @@
 import { upsertUser } from "../db/models/user.js";
+import supabase from "../../supabase.js";
 
 export async function registerUser(req, res) {
   const { name, email, role, instagram, linkedin, website } = req.body;
@@ -28,6 +29,12 @@ export async function registerUser(req, res) {
   const [firstname, ...rest] = name.trim().split(" ");
   const lastname = rest.join(" ") || null;
 
+    // 🔥 DELETE EXISTING USER (FIX)
+  await supabase
+    .from("users")
+    .delete()
+    .eq("email", email);
+
   // SAVE USER
   const { data: user, error } = await upsertUser({
     firstname,
@@ -39,8 +46,8 @@ export async function registerUser(req, res) {
     website: website || null,
   });
   if (error) {
-    return res.status(500).json({ error: "Something went wrong, please try again" });
-  }
-
+    console.error("DB ERROR:", error); 
+    return res.status(500).json({ error: error.message });
+    }
   res.status(201).json({ user });
 }
