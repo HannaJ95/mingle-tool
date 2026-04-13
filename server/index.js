@@ -56,8 +56,10 @@ io.on("connection", (socket) => {
   io.to(roomId).emit("startQuestions");
 });
 
-  socket.on("joinQueue", () => {
-    console.log("Join queue:", socket.id);
+  socket.on("joinQueue", (user) => {
+    console.log("Join queue:", socket.id, user);
+
+    socket.user = user; 
 
     // Avoid duplicates in queue
     const alreadyInQueue = queue.find(s => s.id === socket.id);
@@ -92,7 +94,7 @@ io.on("connection", (socket) => {
 
   io.to(roomId).emit("groupReady", {
     roomId,
-    players: group.map(p => p.id),
+    players: group.map(p => p.user),
   });
 }
 
