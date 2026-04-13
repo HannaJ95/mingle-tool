@@ -6,7 +6,7 @@ export default function ContactModal({ user, onClose }) {
   const dialogRef = useRef(null);
 
   const fields = [
-    { label: "Name", value: user.name },
+    { label: "Name", value: [user.firstname, user.lastname].filter(Boolean).join(' ') },
     { label: "Mail", value: user.email },
     { label: "Instagram", value: user.instagram },
     { label: "LinkedIn", value: user.linkedin },
