@@ -5,13 +5,14 @@ import { useNavigate } from "react-router";
 import socket from "../../socket";
 import { useEffect } from "react";
 import useAppStore from "../../store/useAppStore";
-import cardImages from "../../assets/cards/cardImages.js";
+import cardIllustrations from "../../assets/cards/cardIllustrations.js";
 
 
 export default function MatchingPage() {
   
   const { card, group } = useAppStore();
-  const cardImage = card ? cardImages[card.name.toLowerCase()] : null;
+
+  const cardImage = card ? cardIllustrations[card.name.toLowerCase()] : null;
 
   const location = useLocation();
   const navigate = useNavigate();
