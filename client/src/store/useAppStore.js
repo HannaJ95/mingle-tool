@@ -59,7 +59,7 @@ const useAppStore = create((set) => ({
   },
   card: {
     id: 1,
-    name: "hund",
+    name: "kitty",
   },
   questions: [
     {

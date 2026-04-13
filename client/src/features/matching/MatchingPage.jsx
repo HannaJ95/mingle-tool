@@ -2,12 +2,12 @@ import Button from "../../components/ui/Button";
 import Text from "../../components/ui/Text.jsx";
 import useAppStore from "../../store/useAppStore";
 
-import cardImages from "../../assets/cards/cardImages.js";
+import cardIllustrations from "../../assets/cards/cardIllustrations.js";
 
 export default function MatchingPage() {
   const { card, group } = useAppStore();
 
-  const cardImage = card ? cardImages[card.name.toLowerCase()] : null;
+  const cardImage = card ? cardIllustrations[card.name.toLowerCase()] : null;
 
   return (
     <div className="min-w-80 max-w-screen flex flex-col items-center min-h-screen justify-end">
