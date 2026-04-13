@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Button from "../../components/ui/Button";
-import { useNavigate, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
 import Field from "./Field";
 import SocialLinks from "./SocialLinks";
+import useAppStore from "../../store/useAppStore";
 
 export default function RegisterForm() {
-  const navigate = useNavigate();
+  const { setStep } = useAppStore();
 
   const [searchParams] = useSearchParams();
   const role = searchParams.get("role");
@@ -65,7 +66,7 @@ export default function RegisterForm() {
     }
 
     sessionStorage.setItem("userId", data.user.id);
-    navigate("/rules");
+    setStep("rules");
   };
 
   return (

@@ -79,8 +79,10 @@ const useAppStore = create((set) => ({
     },
   ],
   contacts: [],
+  step: "rules",
 
   setUser: (user) => set({ user }),
+  setStep: (step) => set({ step }),
   setGroup: (group) => set({ group }),
   setCard: (card) => set({ card }),
   setQuestions: (questions) => set({ questions }),

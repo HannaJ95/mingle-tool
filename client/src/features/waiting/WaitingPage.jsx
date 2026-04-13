@@ -2,7 +2,7 @@ import Text from "../../components/ui/Text.jsx";
 
 export default function WaitingPage() {
   return (
-      <div className="min-w-80 max-w-screen flex flex-col items-center">
+      <div className="min-w-80 max-w-sm mx-auto w-screen flex flex-col items-center">
       <main className="min-h-screen w-full max-w-md flex flex-col justify-center gap-10 xs:gap-14">
         <header className="text-center">
           <Text as="h1" variant="heading" className="text-primary">

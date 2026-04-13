@@ -8,19 +8,19 @@ import ArrowLeftIcon from "../../assets/icons/arrowLeft.svg?react";
 import ArrowRightIcon from "../../assets/icons/arrowRight.svg?react";
 
 export default function QuestionsPage() {
-  const { questions } = useAppStore();
+  const { questions, setStep } = useAppStore();
 
   const [current, setCurrent] = useState(0);
 
   return (
-    <div className="min-w-80 max-w-screen flex flex-col items-center min-h-screen justify-end">
+    <div className="min-w-80 max-w-sm mx-auto w-screen flex flex-col items-center min-h-screen justify-end">
       <main className="h-full max-w-md flex flex-col items-center gap-10 p-6">
         <Text as="h1" variant="heading">
           Let´s Talk!
         </Text>
 
         {/* QUESTION CARD WITH QUESTION */}
-        <div className="relative">
+        <div className="relative max-w-9/10">
 
           {/* CARD */}
           <div aria-live="polite" aria-atomic="true">
@@ -44,7 +44,7 @@ export default function QuestionsPage() {
           </div>
         </div>
 
-        <Button className={current === questions.length - 1 ? "" : "invisible pointer-events-none"}>
+        <Button onClick={() => setStep("contact")} className={current === questions.length - 1 ? "" : "invisible pointer-events-none"}>
           We are finished
         </Button>
 
@@ -58,7 +58,7 @@ function NavButton({ label, icon: Icon, onClick }) {
     <button
       aria-label={label}
       onClick={onClick}
-      className="flex items-center justify-center text-light size-17 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg"
+      className="flex items-center justify-center text-light size-16 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg"
     >
       <Icon />
     </button>

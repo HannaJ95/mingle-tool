@@ -5,12 +5,12 @@ import useAppStore from "../../store/useAppStore";
 import cardIllustrations from "../../assets/cards/cardIllustrations.js";
 
 export default function MatchingPage() {
-  const { card, group } = useAppStore();
+  const { card, group, setStep } = useAppStore();
 
   const cardImage = card ? cardIllustrations[card.name.toLowerCase()] : null;
 
   return (
-    <div className="min-w-80 max-w-screen flex flex-col items-center min-h-screen justify-end">
+    <div className="max-w-sm mx-auto min-w-80 w-screen flex flex-col items-center min-h-screen justify-end">
       <main className="h-full flex flex-col gap-6 p-6 w-full max-w-md">
         <Text as="h1" variant="heading" className="text-dark text-center">
           Track down your matches
@@ -33,7 +33,7 @@ export default function MatchingPage() {
           </Text>
         </div>
 
-        <Button>We are ready</Button>
+        <Button onClick={() => setStep("questions")}>We are ready</Button>
       </main>
     </div>
   );

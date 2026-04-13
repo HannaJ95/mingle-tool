@@ -1,11 +1,13 @@
 import Text from "../../components/ui/Text.jsx";
 import RulesSection from "./RulesSection.jsx";
 import Button from "../../components/ui/Button.jsx";
+import useAppStore from "../../store/useAppStore";
 
 function RulesPage() {
+  const { setStep } = useAppStore();
   return (
-    <div className="min-w-80 max-w-screen flex flex-col items-center bg-primary">
-      <div className="min-h-screen w-full max-w-md flex flex-col justify-end p-6">
+    <div className="min-w-80 mx-auto w-screen flex flex-col items-center bg-primary">
+      <div className="max-w-sm min-h-screen w-full flex flex-col justify-end p-6">
         <header>
           <Text
             as="h1"
@@ -43,7 +45,7 @@ function RulesPage() {
             />
           </div>
 
-          <Button arrow>START</Button>
+          <Button arrow onClick={() => setStep("waiting")}>START</Button>
         </main>
       </div>
     </div>
