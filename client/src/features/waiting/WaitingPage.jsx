@@ -7,7 +7,8 @@ export default function WaitingPage() {
   const navigate = useNavigate();
 
 useEffect(() => {
-  const user = JSON.parse(sessionStorage.getItem("user"));
+  // const user = { name: "Allan" };
+  JSON.parse(sessionStorage.getItem("user"));
 
   console.log("Joining queue as:", user);
 

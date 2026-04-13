@@ -44,6 +44,13 @@ export default function MatchingPage() {
           <Text as="p" variant="subheading" className="text-dark">
             Total: {players?.length || 0} members
           </Text>
+
+          <div>
+            {players?.map((player, index) => (
+            <p key={index}>{player?.name}</p>
+            ))}
+          </div>
+
         </div>
 
         <Button onClick={() => socket.emit("ready") }>We are ready</Button>
