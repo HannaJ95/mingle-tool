@@ -70,6 +70,7 @@ function tryCreateGroup() {
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
+  
   //  Join queue
   
   socket.on("joinQueue", async (user) => {
@@ -78,7 +79,12 @@ io.on("connection", (socket) => {
   ...user,
   socketId: socket.id,
 };
-  await supabase.from("waiting_room").insert([
+if (!user || !user.id) {
+  console.log("❌ STOPP - user är undefined:", user);
+  return;
+}
+
+await supabase.from("waiting_room").insert([
   {
     user_id: user.id,
     role: user.role,
