@@ -1,4 +1,4 @@
-import supabase from '../../../supabase.js';
+import supabase from '../supabase.js';
 
 // Create user OR update user if email already exists in DB
 export async function upsertUser({
@@ -12,7 +12,10 @@ export async function upsertUser({
 }) {
   const { data, error } = await supabase
     .from('users')
-    .insert({ firstname, lastname, email, role, instagram, linkedin, website })
+    .upsert(
+      { firstname, lastname, email, role, instagram, linkedin, website },
+      { onConflict: 'email' }
+    )
     .select()
     .single();
   return { data, error };

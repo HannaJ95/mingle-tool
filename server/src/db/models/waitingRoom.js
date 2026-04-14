@@ -1,6 +1,8 @@
-import supabase from '../../../supabase.js';
+import supabase from '../supabase.js';
 
 export async function addToWaitingRoom(userId, socketId) {
+  await supabase.from('waiting_room').delete().eq('user_id', userId);
+
   const { data, error } = await supabase
     .from('waiting_room')
     .insert({ user_id: userId, socket_id: socketId })
@@ -21,5 +23,13 @@ export async function removeFromWaitingRoom(userId) {
     .from('waiting_room')
     .delete()
     .eq('user_id', userId);
+  return { data, error };
+}
+
+export async function removeFromWaitingRoomBySocketId(socketId) {
+  const { data, error } = await supabase
+    .from('waiting_room')
+    .delete()
+    .eq('socket_id', socketId);
   return { data, error };
 }
