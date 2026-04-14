@@ -9,7 +9,6 @@ import QuestionsPage from "./features/questions/QuestionsPage";
 import ContactsPage from "./features/contact/ContactsPage";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import useAppStore from "./store/useAppStore";
-
 import "./App.css";
 
 const stepToPath = {
@@ -26,6 +25,7 @@ function Navigator() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (step === "register") return;
     const path = stepToPath[step];
     if (path) navigate(path);
   }, [step]);
@@ -33,38 +33,61 @@ function Navigator() {
   return null;
 }
 
+function AppContent() {
+  return (
+    <>
+      <Navigator />
+      <Routes>
+        <Route path="/" element={<RegisterPage />} />
+        <Route
+          path="/rules"
+          element={
+            <ProtectedRoute require={["user"]}>
+              <RulesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/waiting"
+          element={
+            <ProtectedRoute require={["user"]}>
+              <WaitingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/matching"
+          element={
+            <ProtectedRoute require={["user", "group", "card"]}>
+              <MatchingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/questions"
+          element={
+            <ProtectedRoute require={["user", "group", "questions"]}>
+              <QuestionsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <ProtectedRoute require={["user", "group"]}>
+              <ContactsPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
-      {/* <Navigator /> */}
-      <Routes>
-        <Route path="/" element={<RegisterPage />} />
-        <Route path="/rules" element={
-          <ProtectedRoute require={["user"]}>
-            <RulesPage />
-          </ProtectedRoute>
-        } />
-        <Route path="/waiting" element={
-          <ProtectedRoute require={["user"]}>
-            <WaitingPage />
-          </ProtectedRoute>
-        } />
-        <Route path="/matching" element={
-          <ProtectedRoute require={["user", "group", "card"]}>
-            <MatchingPage />
-          </ProtectedRoute>
-        } />
-        <Route path="/questions" element={
-          <ProtectedRoute require={["user", "group", "questions"]}>
-            <QuestionsPage />
-          </ProtectedRoute>
-        } />
-        <Route path="/contact" element={
-          <ProtectedRoute require={["user", "group"]}>
-            <ContactsPage />
-          </ProtectedRoute>
-        } />
-      </Routes>
+      <AppContent />
     </BrowserRouter>
   );
 }

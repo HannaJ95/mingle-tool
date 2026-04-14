@@ -15,7 +15,7 @@ export default function ProtectedRoute({ children, require: requirements = [] })
 
   const allMet = requirements.every((req) => checks[req]);
 
-  if (!allMet) return <Navigate to="/" replace />;
+  if (!allMet) return <Navigate to={user ? `/?role=${user.role}` : "/"} replace />;
 
   return children;
 }

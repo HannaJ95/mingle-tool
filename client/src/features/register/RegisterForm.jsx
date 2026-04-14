@@ -4,9 +4,10 @@ import { useSearchParams } from "react-router";
 import Field from "./Field";
 import SocialLinks from "./SocialLinks";
 import useAppStore from "../../store/useAppStore";
+import { connectSocket } from "../../services/socket";
 
 export default function RegisterForm() {
-  const { setStep } = useAppStore();
+  const { user, setUser, setStep } = useAppStore();
 
   const [searchParams] = useSearchParams();
   const role = searchParams.get("role");
@@ -14,11 +15,11 @@ export default function RegisterForm() {
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    instagram: "",
-    linkedin: "",
-    website: "",
+    name: user ? [user.firstname, user.lastname].filter(Boolean).join(" ") : "",
+    email: user?.email ?? "",
+    instagram: user?.instagram ?? "",
+    linkedin: user?.linkedin ?? "",
+    website: user?.website ?? "",
   });
 
   const handleChange = (field) => (e) => {
@@ -65,7 +66,8 @@ export default function RegisterForm() {
       return;
     }
 
-    sessionStorage.setItem("userId", data.user.id);
+    setUser(data.user);
+    connectSocket(data.user.id);
     setStep("rules");
   };
 

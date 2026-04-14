@@ -19,7 +19,7 @@ function RulesPage() {
         </header>
 
         <main className="flex flex-col">
-          <div className="flex flex-col gap-8 pb-14">
+          <div className="flex flex-col gap-8 pb-10">
             <RulesSection
               index="1"
               title="Get you an animal card"

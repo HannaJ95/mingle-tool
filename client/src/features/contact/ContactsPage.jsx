@@ -11,7 +11,7 @@ import contactIcons from "../../assets/icons/contact/contactIcons.js";
 export default function ContactsPage() {
   const navigate = useNavigate();
   const [selectedUser, setSelectedUser] = useState(null);
-  const { user, group } = useAppStore();
+  const { user, group, resetGame } = useAppStore();
 
   const users = [...(group?.members ?? [])].sort((a, b) => {
     if (a.id === user?.id) return -1;
@@ -56,7 +56,7 @@ export default function ContactsPage() {
           ))}
         </ul>
 
-        <Button onClick={() => navigate("/?role=student")}>START NEW GAME</Button>
+        <Button onClick={() => { resetGame(); navigate(`/?role=${user?.role ?? "student"}`); }}>START NEW GAME</Button>
       </main>
     </>
   );
