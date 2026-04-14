@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import Field from "./Field";
 import SocialLinks from "./SocialLinks";
 import socket from "../../socket";
+import useAppStore from "../../store/useAppStore";
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -59,8 +60,12 @@ export default function RegisterForm() {
     );
 
     const data = await response.json();
+    useAppStore.getState().setUser(data.user);
+    sessionStorage.setItem("user", JSON.stringify(data.user));
+    navigate("/rules");
 
     console.log("USER FROM DB:", data.user);
+
     socket.emit("joinQueue", data.user);
 
     if (!response.ok) {
@@ -68,7 +73,7 @@ export default function RegisterForm() {
       return;
     }
 
-    sessionStorage.setItem("user", JSON.stringify(data.user));
+    sessionStorage.setItem("user", JSON.stringify(data.user,));
     navigate("/rules");
   };
 
@@ -115,4 +120,3 @@ export default function RegisterForm() {
     </form>
   );
 }
-

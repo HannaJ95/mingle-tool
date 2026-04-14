@@ -42,17 +42,49 @@ let studentQueue = [];
 let companyQueue = [];
 const MIN_PLAYERS = 4;
 const MAX_PLAYERS = 5;
+function tryCreateGroup() {
+  console.log("Students:", studentQueue.length);
+  console.log("Companies:", companyQueue.length);
+
+  if (studentQueue.length < 3 || companyQueue.length < 1) return;
+
+  const students = studentQueue.splice(0, 3);
+  const company = companyQueue.splice(0, 1);
+
+  const group = [...company, ...students];
+
+  
+  const roomId = `room-${Date.now()}`;
+  
+  console.log("Group created:", group);
+
+  group.forEach((member) => {
+    io.to(member.socketId).emit("groupReady", {
+      members: group,
+      roomId,
+    });
+  });
+}
 
 // SOCKET LOGIC
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
   //  Join queue
-  socket.on("joinQueue", (user) => {
-    const userWithSocket = {
-      ...user,
-      socketId: socket.id,
-    };
+  
+  socket.on("joinQueue", async (user) => {
+
+  const userWithSocket = {
+  ...user,
+  socketId: socket.id,
+};
+  await supabase.from("waiting_room").insert([
+  {
+    user_id: user.id,
+    role: user.role,
+    socketId: socket.id,
+  },
+]);
 
     console.log("User joined:", userWithSocket);
 
@@ -63,11 +95,13 @@ io.on("connection", (socket) => {
     } else {
       console.log("Invalid role:", userWithSocket);
     }
+    tryCreateGroup();
   });
 
   //  When user clicks "We are ready"
   socket.on("ready", () => {
     console.log("READY clicked by:", socket.id);
+    io.emit("startQuestions");
 
     const roomId = socket.roomId;
 
