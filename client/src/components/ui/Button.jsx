@@ -7,7 +7,7 @@ export default function Button({ children, onClick, arrow = false, variant = 'pr
 
   const variants = {
     primary: 'w-full font-bold bg-secondary text-2xl p-8 rounded-4xl',
-    connect: 'text-xs bg-primary text-white py-1 px-3 rounded-sm'
+    connect: 'text-xs leading-none bg-primary text-white py-2 px-3 rounded-sm'
   }
 
   return (
