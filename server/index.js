@@ -42,7 +42,8 @@ let studentQueue = [];
 let companyQueue = [];
 const MIN_PLAYERS = 4;
 const MAX_PLAYERS = 5;
-function tryCreateGroup() {
+
+async function tryCreateGroup() {
   console.log("Students:", studentQueue.length);
   console.log("Companies:", companyQueue.length);
 
@@ -64,6 +65,13 @@ function tryCreateGroup() {
       roomId,
     });
   });
+
+  await supabase
+  // .from("waiting_room")
+  // .delete()
+  // .in("socketId", group.map((u) => u.socketId));
+
+console.log("🧹 Removed matched users from DB");
 }
 
 // SOCKET LOGIC
@@ -91,7 +99,16 @@ await supabase.from("waiting_room").insert([
     socketId: socket.id,
   },
 ]);
+  const { data: users, error } = await supabase
+  .from("waiting_room")
+  .select("*");
 
+if (error) {
+  console.log(" DB ERROR:", error);
+} else {
+  console.log(" USERS IN DB:", users);
+}
+  
     console.log("User joined:", userWithSocket);
 
     if (userWithSocket.role === "student") {
