@@ -5,6 +5,7 @@ import Field from "./Field";
 import SocialLinks from "./SocialLinks";
 import socket from "../../socket";
 
+
 export default function RegisterForm() {
   const navigate = useNavigate();
 
@@ -61,14 +62,13 @@ export default function RegisterForm() {
     const data = await response.json();
 
     console.log("USER FROM DB:", data.user);
-    socket.emit("joinQueue", data.user);
 
     if (!response.ok) {
       setErrors((prev) => ({ ...prev, server: data.error }));
       return;
     }
 
-    sessionStorage.setItem("userId", JSON.stringify(data.user.id));
+    sessionStorage.setItem("user", JSON.stringify(data.user));
     navigate("/rules");
   };
 
