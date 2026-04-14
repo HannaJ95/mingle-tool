@@ -6,6 +6,7 @@ import SocialLinks from "./SocialLinks";
 import socket from "../../socket";
 import useAppStore from "../../store/useAppStore";
 
+
 export default function RegisterForm() {
   const navigate = useNavigate();
 
@@ -66,14 +67,16 @@ export default function RegisterForm() {
 
     console.log("USER FROM DB:", data.user);
 
+
     socket.emit("joinQueue", data.user);
+
 
     if (!response.ok) {
       setErrors((prev) => ({ ...prev, server: data.error }));
       return;
     }
 
-    sessionStorage.setItem("user", JSON.stringify(data.user,));
+    sessionStorage.setItem("user", JSON.stringify(data.user));
     navigate("/rules");
   };
 
