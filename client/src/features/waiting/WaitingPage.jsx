@@ -10,8 +10,7 @@ useEffect(() => {
   // const user = { name: "Allan" };
   const user = JSON.parse(sessionStorage.getItem("user"));
 
-  console.log("Joining queue as:", user);
-
+  console.log("USER SENT:", user);
   socket.emit("joinQueue", user);
 
   const handleGroupReady = (data) => {

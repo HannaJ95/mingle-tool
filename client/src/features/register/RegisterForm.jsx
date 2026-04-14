@@ -68,7 +68,7 @@ export default function RegisterForm() {
       return;
     }
 
-    sessionStorage.setItem("userId", JSON.stringify(data.user.id));
+    sessionStorage.setItem("user", JSON.stringify(data.user));
     navigate("/rules");
   };
 

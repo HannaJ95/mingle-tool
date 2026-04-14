@@ -63,7 +63,10 @@ export default function MatchingPage() {
 
         </div>
 
-        <Button onClick={() => socket.emit("ready") }>We are ready</Button>
+        <Button onClick={() => {
+          console.log("CLICK READY");
+          socket.emit("ready");
+        }}>We are ready</Button>
       </main>
     </div>
   );
