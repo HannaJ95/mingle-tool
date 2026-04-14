@@ -14,7 +14,7 @@ export default function WaitingPage() {
   
 
 useEffect(() => {
-  if (!user) return; 
+  if (!user.id) return; 
 
   console.log("Joining queue as:", user);
 

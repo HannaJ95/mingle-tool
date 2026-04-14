@@ -9,7 +9,7 @@ import cardIllustrations from "../../assets/cards/cardIllustrations.js";
 
 
 export default function MatchingPage() {
-  
+ 
   const { card, group } = useAppStore();
 
   const cardImage = card ? cardIllustrations[card.name.toLowerCase()] : null;

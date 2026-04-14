@@ -38,7 +38,8 @@ app.get("/", (req, res) => {
 });
 
 // Matchmaking state
-let queue = [];
+let studentQueue = [];
+let companyQueue = [];
 const MIN_PLAYERS = 4;
 const MAX_PLAYERS = 5;
 
@@ -46,23 +47,25 @@ const MAX_PLAYERS = 5;
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
-  // 🔹 Join queue
+  //  Join queue
   socket.on("joinQueue", (user) => {
-    console.log("Join queue:", socket.id, user);
+    const userWithSocket = {
+      ...user,
+      socketId: socket.id,
+    };
 
-    socket.user = user; 
+    console.log("User joined:", userWithSocket);
 
-    const alreadyInQueue = queue.find((s) => s.id === socket.id);
-    if (alreadyInQueue) return;
-
-    queue.push(socket);
-
-    console.log("Queue:", queue.map((s) => s.id));
-
-    tryCreateGroup();
+    if (userWithSocket.role === "student") {
+      studentQueue.push(userWithSocket);
+    } else if (userWithSocket.role === "company") {
+      companyQueue.push(userWithSocket);
+    } else {
+      console.log("Invalid role:", userWithSocket);
+    }
   });
 
-  // 🔹 When user clicks "We are ready"
+  //  When user clicks "We are ready"
   socket.on("ready", () => {
     console.log("READY clicked by:", socket.id);
 
@@ -75,70 +78,11 @@ io.on("connection", (socket) => {
     io.to(roomId).emit("startQuestions");
   });
 
-  // 🔹 Disconnect
+  //  Disconnect
   socket.on("disconnect", () => {
     console.log("User disconnected:", socket.id);
-
-    queue = queue.filter((s) => s.id !== socket.id);
   });
 });
-
-// CREATE GROUP
- async function tryCreateGroup() {
-  if (queue.length < MIN_PLAYERS) return;
-
-  const group = queue.splice(0, MAX_PLAYERS);
-  const roomId = `room-${Date.now()}`;
-
-  console.log("Creating room:", roomId);
-
-    // 🔴 1. create group in DB
-  const { data: groupData, error: groupError } = await supabase
-    .from("groups")
-    .insert([{}])
-    .select();
-
-  if (groupError) {
-    console.error(groupError);
-    return;
-  }
-
-  const dbGroup = groupData[0];
-
-  //join socket room
-  group.forEach((player) => {
-    player.join(roomId);
-    player.roomId = roomId; 
-  });
-
-  // 🟡 3. connect users to group
-  await supabase.from("group_members").insert(
-    group.map((player) => ({
-      group_id: dbGroup.id,
-      user_id: player.user.id,
-    }))
-  );
-
-  // 🟣 4. get cards
-  const { data: cards } = await supabase
-    .from("cards")
-    .select("*")
-    .limit(3);
-
-  // 🟢 5. connect to group
-  await supabase.from("group_questions").insert(
-    cards.map((card) => ({
-      group_id: dbGroup.id,
-      card_id: card.id,
-    }))
-  );
-
-  io.to(roomId).emit("groupReady", {
-    roomId,
-    groupId: dbGroup.id,
-    players: group.map((p) => p.user || { id: p.id }),
-  });
-}
 
 // START SERVER
 server.listen(PORT, () => {
