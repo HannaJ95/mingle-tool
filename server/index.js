@@ -54,10 +54,24 @@ async function tryCreateGroup() {
 
   const group = [...company, ...students];
 
-  
   const roomId = `room-${Date.now()}`;
+//create group in DB
+  const { data: newGroup, error } = await supabase
+  .from("groups")
+  .insert([
+    {
+      room_id: roomId,
+    },
+  ])
+  .select();
+
+if (error) {
+  console.log("Group DB error:", error);
+} else {
+  console.log("Group saved:", newGroup);
   
   console.log("Group created:", group);
+
 
   group.forEach((member) => {
     io.to(member.socketId).emit("groupReady", {
@@ -65,6 +79,7 @@ async function tryCreateGroup() {
       roomId,
     });
   });
+}
 
   await supabase
   // .from("waiting_room")
