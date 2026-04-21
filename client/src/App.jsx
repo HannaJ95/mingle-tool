@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router";
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router";
 
 import RegisterPage from "./features/register/RegisterPage";
 import RulesPage from "./features/rules/RulesPage";
@@ -8,6 +8,7 @@ import MatchingPage from "./features/matching/MatchingPage";
 import QuestionsPage from "./features/questions/QuestionsPage";
 import ContactsPage from "./features/contact/ContactsPage";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import DemoFlow from "./features/demo/DemoFlow.jsx";
 import useAppStore from "./store/useAppStore";
 import "./App.css";
 
@@ -23,8 +24,10 @@ const stepToPath = {
 function Navigator() {
   const { step } = useAppStore();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
+    if (pathname.startsWith("/demo")) return;
     if (step === "register") return;
     const path = stepToPath[step];
     if (path) navigate(path);
@@ -79,6 +82,7 @@ function AppContent() {
             </ProtectedRoute>
           }
         />
+        <Route path="/demo" element={<DemoFlow />} />
       </Routes>
     </>
   );
