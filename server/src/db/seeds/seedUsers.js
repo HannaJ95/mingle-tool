@@ -1,4 +1,4 @@
-import supabase from '../../../supabase.js';
+import supabase from '../supabase.js';
 import { users } from './data/users.js';
 
 async function seedUsers() {

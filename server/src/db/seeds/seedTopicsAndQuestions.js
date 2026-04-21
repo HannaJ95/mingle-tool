@@ -1,4 +1,4 @@
-import supabase from '../../../supabase.js';
+import supabase from '../supabase.js';
 import { topicsWithQuestions } from './data/topicsWithQuestions.js';
 
 async function seedTopicsAndQuestions() {

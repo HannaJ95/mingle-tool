@@ -1,4 +1,4 @@
-import supabase from "../../../supabase.js";
+import supabase from "../supabase.js";
 
 export async function getAvailableCards() {
   const { data, error } = await supabase

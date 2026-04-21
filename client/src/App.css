@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter";
 
+@layer base {
+  button, a {
+    @apply active:scale-99 active:opacity-96 transition-transform;
+  }
+}
+
 @theme {
   --color-primary: #001a52;
   --color-secondary: #e51536;

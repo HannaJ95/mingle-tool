@@ -3,13 +3,15 @@ import Text from "../../components/ui/Text.jsx";
 import Button from "../../components/ui/Button";
 import useAppStore from "../../store/useAppStore";
 import ModalContact from "./ModalContact.jsx"
+import { useNavigate } from "react-router";
 
 import CheersIcon from "../../assets/icons/cheers.svg?react";
 import contactIcons from "../../assets/icons/contact/contactIcons.js";
 
 export default function ContactsPage() {
+  const navigate = useNavigate();
   const [selectedUser, setSelectedUser] = useState(null);
-  const { user, group } = useAppStore();
+  const { user, group, resetGame } = useAppStore();
 
   const users = [...(group?.members ?? [])].sort((a, b) => {
     if (a.id === user?.id) return -1;
@@ -22,7 +24,7 @@ export default function ContactsPage() {
       {selectedUser && (
         <ModalContact user={selectedUser} onClose={() => setSelectedUser(null)} />
       )}
-      <main className="min-w-80 p-6 max-w-md w-screen min-h-screen flex flex-col justify-end gap-14 text-primary mx-auto">
+      <main className="max-w-sm min-w-80 p-6 w-screen min-h-screen flex flex-col justify-end gap-14 text-primary mx-auto">
         <div className="flex items-end justify-between">
           <Text as="h1" variant="heading">
             CONNECT
@@ -54,7 +56,7 @@ export default function ContactsPage() {
           ))}
         </ul>
 
-        <Button>START NEW GAME</Button>
+        <Button onClick={() => { resetGame(); navigate(`/?role=${user?.role ?? "student"}`); }}>START NEW GAME</Button>
       </main>
     </>
   );

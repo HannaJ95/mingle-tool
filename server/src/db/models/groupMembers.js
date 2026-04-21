@@ -1,4 +1,4 @@
-import supabase from '../../../supabase.js';
+import supabase from '../supabase.js';
 
 export async function insertGroupMember(groupId, userId) {
   const { data, error } = await supabase
