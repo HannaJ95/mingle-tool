@@ -45,7 +45,7 @@ function RulesPage() {
             />
           </div>
 
-          <Button arrow onClick={() => setStep("waiting")}>START</Button>
+          <Button arrow variant="glass" onClick={() => setStep("waiting")}>START</Button>
         </main>
       </div>
     </div>
