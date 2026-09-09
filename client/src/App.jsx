@@ -8,6 +8,7 @@ import MatchingPage from "./features/matching/MatchingPage";
 import QuestionsPage from "./features/questions/QuestionsPage";
 import ContactsPage from "./features/contact/ContactsPage";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import DevPanel from "./components/DevPanel.jsx";
 import useAppStore from "./store/useAppStore";
 import "./App.css";
 
@@ -37,6 +38,7 @@ function AppContent() {
   return (
     <>
       <Navigator />
+      {import.meta.env.DEV && <DevPanel />}
       <Routes>
         <Route path="/" element={<RegisterPage />} />
         <Route
