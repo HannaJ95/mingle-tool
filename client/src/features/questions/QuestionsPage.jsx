@@ -9,57 +9,31 @@ import ArrowRightIcon from "../../assets/icons/arrowRight.svg?react";
 
 export default function QuestionsPage() {
   const { questions, setStep } = useAppStore();
-
   const [current, setCurrent] = useState(0);
 
   return (
     <div className="min-w-80 max-w-sm mx-auto w-screen flex flex-col items-center min-h-screen justify-end">
       <main className="h-full max-w-md flex flex-col items-center gap-10 p-6">
-        <Text as="h1" variant="heading">
-          Let´s Talk!
-        </Text>
-
-        {/* QUESTION CARD WITH QUESTION */}
+        <Text as="h1" variant="heading">Let´s Talk!</Text>
         <div className="relative max-w-9/10">
-
-          {/* CARD */}
           <div aria-live="polite" aria-atomic="true">
             <QuestionCard question={questions[current].question} />
           </div>
-
-          {/* NAV BUTTONS */}
           <div className="absolute top-1/2 -translate-y-1/2 -left-6 -right-6 flex justify-between">
-            <NavButton
-              label="Previous question"
-              icon={ArrowLeftIcon}
-              onClick={() => setCurrent((c) => Math.max(0, c - 1))}
-            />
-            <NavButton
-              label="Next question"
-              icon={ArrowRightIcon}
-              onClick={() =>
-                setCurrent((c) => Math.min(questions.length - 1, c + 1))
-              }
-            />
+            <NavButton label="Previous question" icon={ArrowLeftIcon} onClick={() => setCurrent((c) => Math.max(0, c - 1))} disabled={current === 0} />
+            <NavButton label="Next question" icon={ArrowRightIcon} onClick={() => setCurrent((c) => Math.min(questions.length - 1, c + 1))} disabled={current === questions.length - 1} />
           </div>
         </div>
-
-        <Button onClick={() => setStep("contact")} className={current === questions.length - 1 ? "" : "invisible pointer-events-none"}>
-          We are finished
-        </Button>
-
+        <Button onClick={() => setStep("contact")} className={current === questions.length - 1 ? "" : "invisible pointer-events-none"}>We are finished</Button>
       </main>
     </div>
   );
 }
 
-function NavButton({ label, icon: Icon, onClick }) {
+function NavButton({ label, icon: Icon, onClick, disabled = false }) {
   return (
-    <button
-      aria-label={label}
-      onClick={onClick}
-      className="flex items-center justify-center text-light size-16 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg"
-    >
+    <button type="button" aria-label={label} onClick={onClick} disabled={disabled}
+      className="flex items-center justify-center text-light size-16 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2">
       <Icon />
     </button>
   );
